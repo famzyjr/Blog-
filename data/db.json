@@ -1,0 +1,18 @@
+{
+    "blogs": [
+        {
+            "title": "My First Blog",
+            "body": "Front-End Development,Resposive Webdesign,   Web Design: Constantly exploring new design trends, user experience principles, and responsive design techniques to create visually appealing and user-friendly website. Open Source Contribution: Actively involved in contributing to open-source projects on platform like GitHub, collaborating with developers globally to enhance coding skills and support the community.",
+            "author": "Ayuba",
+            "id": 1
+        },
+        {
+            "title": "Opening Party",
+            "body": "Why do We use Hooks instead of mount",
+            "author": "Gemi",
+            "id": 2
+        }
+    ]
+
+    
+}
