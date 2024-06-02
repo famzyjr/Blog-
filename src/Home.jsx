@@ -3,7 +3,7 @@ import useFetch from "./useFetch";
 
 //parent component
 const Home = () => {
-  const {data:blog, ispending, error} = useFetch("http://localhost:8000/blogs/")
+  const {data:blog, ispending, error} = useFetch("http://localhost:8000/blogs")
   console.log(blog);
   return (
     <div className="home">
