@@ -2,16 +2,17 @@ import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 
 //parent component
+const endpoint = 'https://cw-blog-backend.onrender.com'
 const Home = () => {
-  const {data:blog, ispending, error} = useFetch("http://localhost:8000/blogs")
-  console.log(blog);
+  const {data:blogs, ispending, error} = useFetch(`${endpoint}/api/blogs`)
+  console.log(blogs);
   return (
     <div className="home">
       {error && <div>{error}</div>}
       {ispending && <div>Loading...</div>}
       {/* child component  */}
-      {blog && <BlogList blog={blog} title="All Blogs!"/>}
-      {console.log(blog)}
+      {blogs && <BlogList blog={blogs} title="All Blogs!"/>}
+  
     </div>
   );
 };

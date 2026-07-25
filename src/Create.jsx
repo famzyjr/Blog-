@@ -3,27 +3,42 @@ import { useNavigate } from "react-router-dom";
 
 function Create() {
   const [title, setTitle] = useState("");
-  const [body, setBody] = useState("");
-  const [author, setAuthor] = useState("");
+  const [content, setcontent] = useState("");
+  const [author_name, setAuthor_name] = useState("");
   const [isPending, setisPending] = useState(false);
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const blog = { body, title, author };
+    const blog = { title, author_name,  content};
 
     setisPending(true);
     //making an api request
 
-    fetch("http://localhost:8000/blogs", {
+    const endpoint = "https://cw-blog-backend.onrender.com";
+
+    fetch(`${endpoint}/api/blogs`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" }, //telling the server the type of content we are sending with this req
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(blog),
-    }).then(() => {
-      console.log("new blog added");
-      setisPending(false);
-    });
-    navigate('/');
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Failed to create blog");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log("New blog added:", data);
+        setisPending(false);
+        navigate("/");
+      })
+      .catch((err) => {
+        console.error(err);
+        setisPending(false);
+      });
   };
   return (
     <div className="create">
@@ -40,19 +55,18 @@ function Create() {
         <input
           type="text"
           required
-          value={author}
-          onChange={(e) => setAuthor(e.target.value)}
+          value={author_name}
+          onChange={(e) => setAuthor_name(e.target.value)}
         />
         <label>Blog body:</label>
         <textarea
           required
-          value={body}
-          onChange={(e) => setBody(e.target.value)}
+          value={content}
+          onChange={(e) => setcontent(e.target.value)}
         ></textarea>
 
         {!isPending && <button>Add blog</button>}
         {isPending && <button disabled>adding blog ...</button>}
-       
       </form>
     </div>
   );

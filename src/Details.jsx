@@ -4,28 +4,32 @@ import useFetch from './useFetch'
 
 function Details() {
     const {id} = useParams()
-    const {data:blog, ispending, error} = useFetch("http://localhost:8000/blogs/" + id)
+     const endpoint = "https://cw-blog-backend.onrender.com";
+    const {data:blogs,  ispending, error} = useFetch(`${endpoint}/api/blogs/${id}`);
+     
     const navigate = useNavigate();
 
     const handleClick=()=>{
-    fetch('http://localhost:8000/blogs/' + blog.id,{
+    fetch(`${endpoint}/api/blogs/${id}`,{
     method: 'DELETE'
     }).then(()=>{
       navigate('/');
     }) 
 
     }
-
+    
+    
   return (
     <div className='blog-preview'>
       {/* <h2> me {id}</h2> */}
      {ispending && <p>Loading...</p>}
      {error && <div>{error}</div>}
-      {blog &&(
+      {blogs &&(
         <article>
-          <h2>{blog.title}</h2>
-          <p>Written by {blog.author}</p>
-          <div>{blog.body}</div>
+          <h2>{blogs.title}</h2>
+          
+          <p>Written by {blogs.author_name}</p>
+          <div>{blogs.content}</div>
           <button onClick={handleClick}>delete</button>
         </article>
         

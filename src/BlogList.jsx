@@ -9,7 +9,9 @@ return(
     <div className="blog-preview" key={blogs.id}>
      <Link to={`/blogs/${blogs.id}`}>
      <h2>{blogs.title}</h2>
-      <p>written by {blogs.author }</p>
+      <p>written by {blogs.author_name}</p>
+      <p>Time created  {blogs.created_at}</p>
+
      </Link>
     </div>
    
